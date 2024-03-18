@@ -1,0 +1,67 @@
+---
+# ./06a-eventstreams.yaml
+- name: Managing Event Streams Install
+  hosts: "localhost"
+  gather_facts: false
+  tasks:
+    - include_vars: vars_deployment.yaml
+
+############################################
+# CREATION
+############################################
+    - name: Install Event Streams Catalog Source
+      kubernetes.core.k8s:
+        src: catalog-sources/{{cpversion}}/08-event-streams-catalog-source-3.3.0-v2.yaml
+        state: present
+      when: action  == 'install'
+
+    - name: Install Event Streams OperatorGroup
+      kubernetes.core.k8s:
+        src: resources/{{cpversion}}/06-event-streams-operatorgroup.yaml
+        state: present
+      when: action  == 'install'
+
+    - name: Install Event Streams Operator
+      kubernetes.core.k8s:
+        src: subscriptions/{{cpversion}}/05-event-streams-subscription.yaml
+        state: present
+      when: action  == 'install'
+
+    - name: Create Event Streams Instance
+      kubernetes.core.k8s:
+        src: instances/{{cpversion}}/{{storagetype}}/05-event-streams-instance.yaml
+        state: present
+      when: action  == 'install'
+
+
+############################################
+#  REMOVAL
+############################################
+    - name: Remove Event Streams Instance
+      kubernetes.core.k8s:
+        src: instances/{{cpversion}}/{{storagetype}}/05-event-streams-instance.yaml
+        state: present
+      when: action  == 'remove'   
+
+    - name: Remove Event Streams Operator
+      kubernetes.core.k8s:
+        src: subscriptions/{{cpversion}}/05-event-streams-subscription.yaml
+        state: present
+      when: action  == 'remove' 
+
+    - name: Remove Event Streams OperatorGroup
+      kubernetes.core.k8s:
+        src: resources/{{cpversion}}/06-event-streams-operatorgroup.yaml
+        state: present
+      when: action  == 'remove' 
+
+    - name: Remove Event Streams Catalog Source
+      kubernetes.core.k8s:
+        src: catalog-sources/{{cpversion}}/08-event-streams-catalog-source-3.3.0.yaml
+        state: present
+      when: action  == 'remove'  
+
+
+
+
+

@@ -1,0 +1,29 @@
+---
+# ./01-namespace.yaml
+- name: Managing Namespace for Install
+  gather_facts: false
+  hosts: "localhost"
+  tasks:
+    - include_vars: vars_deployment.yaml
+
+############################################
+#  REMOVAL
+############################################
+    - name: Remove a k8s namespace
+      kubernetes.core.k8s:
+        name: "{{mynamespace}}"
+        api_version: v1
+        kind: Namespace
+        state: absent
+      when:  action  == 'remove'
+
+############################################
+# CREATION
+############################################
+    - name: Create a k8s namespace
+      kubernetes.core.k8s:
+        name: "{{mynamespace}}"
+        api_version: v1
+        kind: Namespace
+        state: present
+      when: action  == 'install'

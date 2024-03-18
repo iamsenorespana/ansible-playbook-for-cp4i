@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: licensing-og
+  namespace: ibm-licensing
+spec:
+  targetNamespaces:
+  - ibm-licensing

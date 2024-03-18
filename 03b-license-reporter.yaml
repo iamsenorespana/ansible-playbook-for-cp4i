@@ -1,0 +1,17 @@
+---
+# ./03b-license-reporter.yaml
+- name: Managing License Reporter
+  hosts: "localhost"
+  gather_facts: false
+  tasks:
+    - include_vars: vars_deployment.yaml
+
+
+############################################
+# CREATION
+############################################
+
+
+############################################
+#  REMOVAL
+############################################

@@ -1,0 +1,55 @@
+---
+# ./02b-subscriptions.yaml
+- name: Managing Operator Subscriptions
+  hosts: "localhost"
+  gather_facts: false
+  vars_prompt:
+    - name: thisservice
+      prompt: Which capability do you want subscription activate [ navigator, mq, ace, eventstreams, certmanager, common-services ] ?
+      private: no
+  tasks:
+    - include_vars: vars_deployment.yaml
+
+############################################
+#  REMOVAL
+############################################
+
+    - name: Remove MQ Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/mq.yaml
+        state: present
+      when:  (action  == 'remove') and  (thisservice == 'mq')
+
+    - name: Remove ACE Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/appconnect.yaml
+        state: present
+      when:  (action  == 'remove') and (thisservice == 'ace')
+
+    - name: Remove Asset Repo Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/asset-repo.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'assetrepo')
+
+############################################
+# CREATION
+############################################
+
+    - name: Install MQ Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/mq.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'mq')
+
+    - name: Install ACE Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/appconnect.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'ace')
+
+    - name: Install Asset Repo Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/asset-repo.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'assetrepo')

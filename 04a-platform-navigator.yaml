@@ -1,0 +1,51 @@
+---
+# ./04a-plaform-navigator.yaml
+- name: Managing Platform Navigator Install
+  hosts: "localhost"
+  gather_facts: false
+  tasks:
+    - include_vars: vars_deployment.yaml
+
+############################################
+# CREATION
+############################################
+    # - name: Install Platform Navigator Catalog Source
+    #   kubernetes.core.k8s:
+    #     src: catalog-sources/{{cpversion}}/03-platform-navigator-catalog-source-7.2.1.yaml
+    #     state: present
+    #   when: action  == 'install'  
+
+    # - name: Install Platform Navigator UI Operator
+    #   kubernetes.core.k8s:
+    #     src: subscriptions/{{cpversion}}/01-platform-navigator-subscription.yaml
+    #     state: present
+    #   when: action  == 'install' 
+
+    - name: Create Platform Navigator Instance
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/01-platform-navigator-instance.yaml
+        state: present
+      when: action  == 'install'    
+
+
+############################################
+#  REMOVAL
+############################################
+
+    - name: Remote Platform Navigator Instance
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/01-platform-navigator-instance.yaml
+        state: absent
+      when: action  == 'remove'  
+
+    # - name: Remove Platform Navigator UI Operator
+    #   kubernetes.core.k8s:
+    #     src: artifacts/{{cpversion}}/01-platform-navigator-instance.yaml
+    #     state: absent
+    #   when: action  == 'remove' 
+
+    # - name: Remove Platform Navigator Catalog Source
+    #   kubernetes.core.k8s:
+    #     src: catalog-sources/{{cpversion}}/03-platform-navigator-catalog-source-7.2.1.yaml
+    #     state: absent
+    #   when: action  == 'remove'  

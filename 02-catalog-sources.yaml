@@ -1,0 +1,35 @@
+---
+# ./02a-catalog-sources.yaml
+- name: Managing Catalog Sources Instance
+  hosts: "localhost"
+  gather_facts: false
+  tasks:
+    - include_vars: vars_deployment.yaml
+
+############################################
+#  REMOVAL
+############################################
+
+    - name: Remove all catalog sources
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/00a-cp4i-catalog-sources.yaml
+        state: absent
+      when:  action  == 'remove'
+
+ 
+
+############################################
+# CREATION
+############################################
+
+    - name: Install all catalog sources
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/00a-cp4i-catalog-sources.yaml
+        state: present
+      when:  action  == 'install'
+
+
+ 
+
+
+

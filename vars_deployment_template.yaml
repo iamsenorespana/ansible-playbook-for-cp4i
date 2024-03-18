@@ -1,0 +1,49 @@
+---
+# ./vars_deployment.yml
+
+##########################################
+# Namespace for deployment
+mynamespace: "tools"
+
+# Variable for Cloud Pak Version
+cpversion: "2023.4"
+
+# Variable for Storage Type: [ ephemeral | odf | roks ]
+storagetype: odf
+
+# Variable to toggle Install Plan: [ Automatic | Manual ]
+installplan: "Automatic"
+
+# Action for Playbook: [ install | remove ]
+action: "install"
+
+# Entitlement Key
+keydata: "<insert entitlement key>"
+
+##########################################
+# PLATFORM NAVIGATOR
+
+
+##########################################
+# ASSET REPOSITORY
+
+
+##########################################
+# EVENT STREAMS
+
+
+##########################################
+# EVENT ENDPOINT MANAGEMENT ( EEM )
+
+
+##########################################
+# EVENT PROCESSING
+
+
+
+
+##########################################
+# Subscriptions 
+# Variables for DataPower Admin Password Secret
+adminsecret: "admin-credentials"
+adminpasswd: "<password>"

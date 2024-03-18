@@ -1,0 +1,80 @@
+---
+# ./03a-license-service.yaml
+- name: Managing License Service
+  hosts: "localhost"
+  gather_facts: false
+  tasks:
+    - include_vars: vars_deployment.yaml
+
+############################################
+#  REMOVAL
+############################################
+
+    - name: Remove License Service Instance
+      kubernetes.core.k8s:
+        src: resources/01i-licensing-instance.yaml
+        state: absent
+      when: action  == 'remove'
+
+    - name: Remove License Service Operator Subscription
+      kubernetes.core.k8s:
+        src: resources/01h-licensing-subscription.yaml
+        state: absent
+      when: action  == 'remove'
+
+    - name: Remove License Service Namespace
+      kubernetes.core.k8s:
+        name: ibm-licensing
+        api_version: v1
+        kind: Namespace
+        state: absent
+      when: action  == 'remove' 
+
+    - name: Remove License Service Catalog Source
+      kubernetes.core.k8s:
+        src: catalog-sources/{{cpversion}}/02a-license-service-catalog-source.yaml
+        state: absent
+      when:  action  == 'remove'
+
+    - name: Remove License Service Operator Group in namespace
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/resources/license-service-operatorgroup.yaml
+        state: absent
+      when: action  == 'remove'  
+
+
+############################################
+# CREATION
+############################################
+    - name: Create License Service Catalog Source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/catalogsource-licensing-service.yaml
+        state: present
+      when: action  == 'install'
+
+    - name: Create License Service Namespace
+      kubernetes.core.k8s:
+        name: ibm-licensing
+        api_version: v1
+        kind: Namespace
+        state: present
+      when: action  == 'install'    
+
+    - name: Enable License Service Operator Group in namespace
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/resources/license-service-operatorgroup.yaml
+        state: present
+      when: action  == 'install'
+
+    - name: Enable License Service Operator Subscription
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/resources/licensing-service-subscription.yaml
+        state: present
+      when: action  == 'install'
+
+    - name: Creating License Service Instance
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/resources/licensing-service-instance.yaml
+        state: present
+      when: action  == 'install'
+

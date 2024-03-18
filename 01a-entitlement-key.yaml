@@ -1,0 +1,38 @@
+---
+# ./01a-entitlement-key.yaml
+- name: Managing Entitlement Key Install
+  gather_facts: false
+  hosts: "localhost"
+  vars_prompt:
+    - name: thisnamespace
+      prompt: What is the namespace you want to create entitlement key?
+      private: no
+  tasks:
+
+    - include_vars: vars_deployment.yaml
+
+############################################
+# CREATION
+############################################
+    - name: Create a k8s namespace
+      kubernetes.core.k8s:
+        name: "{{thisnamespace}}"
+        api_version: v1
+        kind: Namespace
+        state: present
+
+    - name: Create Entitlement Key
+      ansible.builtin.shell:
+        cmd: oc create secret docker-registry ibm-entitlement-key --docker-username=cp --docker-password={{keydata}} --docker-server=cp.icr.io --namespace={{thisnamespace}}      
+      register: createsecret
+
+    - debug:
+        var: createsecret.stdout
+
+    - name: Verify Entitlement Key Secret
+      ansible.builtin.shell:
+        cmd: oc get secret ibm-entitlement-key -o yaml -n {{thisnamespace}}      
+      register: createsecret2
+
+    - debug:
+        var: createsecret2.stdout_lines
