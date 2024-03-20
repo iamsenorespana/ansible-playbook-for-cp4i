@@ -32,6 +32,18 @@
         state: present
       when:  (action  == 'install') and (thisservice == 'assetrepo')
 
+    - name: Remove Event Streams Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/eventstreams.yaml
+        state: present
+      when:  (action  == 'remove') and (thisservice == 'assetrepo')
+
+    - name: Remove Platform Navigator Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/platform-navigator.yaml
+        state: present
+      when:  (action  == 'remove') and (thisservice == 'navigator')
+
 ############################################
 # CREATION
 ############################################
@@ -53,3 +65,15 @@
         src: artifacts/{{cpversion}}/subscriptions/asset-repo.yaml
         state: present
       when:  (action  == 'install') and (thisservice == 'assetrepo')
+
+    - name: Install Event Streams Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/eventstreams.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'assetrepo')
+
+    - name: Install Platform Navigator Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/platform-navigator.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'navigator')

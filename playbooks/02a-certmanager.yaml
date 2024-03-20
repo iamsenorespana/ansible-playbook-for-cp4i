@@ -13,19 +13,19 @@
 # install mysql database service
     - name: Remove openshift cert-manager-operator subscription
       kubernetes.core.k8s:
-        src: cert-manager/3-cm-subscription.yaml
+        src: artifacts/cert-manager/3-cm-subscription.yaml
         state: absent
       when:  action  == 'remove'
 
     - name: Remove a cert manager operatorGroup
       kubernetes.core.k8s:
-        src: cert-manager/2-cm-operatorgroup.yaml
+        src: artifacts/cert-manager/2-cm-operatorgroup.yaml
         state: absent
       when:  action  == 'remove'
 
     - name: Remove a cert-manager namespace
       kubernetes.core.k8s:
-        src: cert-manager/1-cm-namespace.yaml
+        src: artifacts/cert-manager/1-cm-namespace.yaml
         state: absent
       when:  action  == 'remove'
 
@@ -34,19 +34,19 @@
 ############################################
     - name: Create cert-manager namespace
       k8s:
-        src: cert-manager/1-cm-namespace.yaml
+        src: artifacts/cert-manager/1-cm-namespace.yaml
         state: present
       when:  action  == 'install'
 
     - name: Create a cert manager operatorGroup
       k8s:
-        src: cert-manager/2-cm-operatorgroup.yaml
+        src: artifacts/cert-manager/2-cm-operatorgroup.yaml
         state: present
       when: action  == 'install'
 
     - name: Create openshift cert-manager-operator subscription
       k8s:
-        src: cert-manager/3-cm-subscription.yaml
+        src: artifacts/cert-manager/3-cm-subscription.yaml
         state: present
       when:  action  == 'install'
 

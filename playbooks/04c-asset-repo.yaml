@@ -1,0 +1,51 @@
+---
+# ./04b-asset-repo.yaml
+- name: Managing Asset Repository Install
+  hosts: "localhost"
+  gather_facts: false
+  tasks:
+    - include_vars: vars_deployment.yaml
+
+############################################
+# CREATION
+############################################
+    # - name: Install Asset Repository Catalog Source
+    #   kubernetes.core.k8s:
+    #     src: catalog-sources/{{cpversion}}/04-asset-repo-catalog-source-1.6.1.yaml
+    #     state: present
+    #   when: action  == 'install'  
+
+    # - name: Install Asset Repository UI Operator
+    #   kubernetes.core.k8s:
+    #     src: subscriptions/{{cpversion}}/02-asset-repo-subscription.yaml
+    #     state: present
+    #   when: action  == 'install' 
+
+    - name: Create Asset Repository Instance
+      kubernetes.core.k8s:
+        src: instances/{{cpversion}}/{{storagetype}}/02-asset-repo-ai-instance.yaml
+        state: present
+      when: action  == 'install'    
+
+
+############################################
+#  REMOVAL
+############################################
+
+    - name: Remote Asset Repository Instance
+      kubernetes.core.k8s:
+        src: instances/{{cpversion}}/02-asset-repo-ai-instance.yaml
+        state: absent
+      when: action  == 'remove'  
+
+    # - name: Remove Asset Repository UI Operator
+    #   kubernetes.core.k8s:
+    #     src: subscriptions/{{cpversion}}/02-asset-repo-subscription.yaml
+    #     state: absent
+    #   when: action  == 'remove' 
+
+    # - name: Remove Asset Repository Catalog Source
+    #   kubernetes.core.k8s:
+    #     src: catalog-sources/{{cpversion}}/{{storagetype}}/04-asset-repo-catalog-source-1.6.1.yaml
+    #     state: absent
+    #   when: action  == 'remove'  
