@@ -36,13 +36,20 @@
       kubernetes.core.k8s:
         src: artifacts/{{cpversion}}/subscriptions/eventstreams.yaml
         state: present
-      when:  (action  == 'remove') and (thisservice == 'assetrepo')
+      when:  (action  == 'remove') and (thisservice == 'eventstreams')
 
     - name: Remove Platform Navigator Operator Subscriptions
       kubernetes.core.k8s:
         src: artifacts/{{cpversion}}/subscriptions/platform-navigator.yaml
         state: present
       when:  (action  == 'remove') and (thisservice == 'navigator')
+
+    - name: Remove Common }/resources/licensing-service-instance.yaml  Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/common-services.yaml
+        state: present
+      when:  (action  == 'remove') and (thisservice == 'common-services')
+      
 
 ############################################
 # CREATION
@@ -70,10 +77,16 @@
       kubernetes.core.k8s:
         src: artifacts/{{cpversion}}/subscriptions/eventstreams.yaml
         state: present
-      when:  (action  == 'install') and (thisservice == 'assetrepo')
+      when:  (action  == 'install') and (thisservice == 'eventstreams')
 
     - name: Install Platform Navigator Operator Subscriptions
       kubernetes.core.k8s:
         src: artifacts/{{cpversion}}/subscriptions/platform-navigator.yaml
         state: present
       when:  (action  == 'install') and (thisservice == 'navigator')
+
+    - name: Install Common Services Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/platform-navigator.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'common-services')

@@ -12,7 +12,7 @@
 
     - name: Remove all catalog sources
       kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/00a-cp4i-catalog-sources.yaml
+        src: artifacts/{{cpversion}}catalog-sources/00a-cp4i-catalog-sources.yaml
         state: absent
       when:  action  == 'remove'
 
@@ -24,7 +24,7 @@
 
     - name: Install all catalog sources
       kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/00a-cp4i-catalog-sources.yaml
+        src: artifacts/{{cpversion}}/catalog-sources/00a-cp4i-catalog-sources.yaml
         state: present
       when:  action  == 'install'
 
