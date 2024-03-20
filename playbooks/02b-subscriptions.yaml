@@ -44,7 +44,7 @@
         state: present
       when:  (action  == 'remove') and (thisservice == 'navigator')
 
-    - name: Remove Common }/resources/licensing-service-instance.yaml  Operator Subscriptions
+    - name: Remove Common Services Operator Subscriptions
       kubernetes.core.k8s:
         src: artifacts/{{cpversion}}/subscriptions/common-services.yaml
         state: present
@@ -87,6 +87,6 @@
 
     - name: Install Common Services Operator Subscriptions
       kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/subscriptions/platform-navigator.yaml
+        src: artifacts/{{cpversion}}/subscriptions/common-services.yaml
         state: present
       when:  (action  == 'install') and (thisservice == 'common-services')
