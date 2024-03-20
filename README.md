@@ -24,4 +24,7 @@ All the individual playbooks are in the **playbooks** folder.  Inside the Playbo
 | 02a-certmanager.yaml   |    | Installs the RH Certificate Manager in namespace    |
 | 02b-subscriptions.yaml  |      | Activates instances of operators clusterwide.  ( you can manually install operators from Operator Hub as well )   |
 | 04a-platform-navigator.yaml    |    | Installs instance of Platform Navigator with 3 replicas for ODF  |
-| Cell 1    | Cell 2    | Cell 3    |
+| 04a-platform-navi-credentails.yaml    |    | Pulls Credentails for initial login for Platform Navigators  |
+
+ 
+
