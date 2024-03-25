@@ -12,13 +12,13 @@
 
     - name: Remove License Service Instance
       kubernetes.core.k8s:
-        src: resources/01i-licensing-instance.yaml
+        src: artifacts/{{cpversion}}/instances/licensing-service.yaml
         state: absent
       when: action  == 'remove'
 
     - name: Remove License Service Operator Subscription
       kubernetes.core.k8s:
-        src: resources/01h-licensing-subscription.yaml
+        src: artifacts/{{cpversion}}/subscriptions/licensing-service.yaml
         state: absent
       when: action  == 'remove'
 
@@ -30,27 +30,27 @@
         state: absent
       when: action  == 'remove' 
 
-    - name: Remove License Service Catalog Source
-      kubernetes.core.k8s:
-        src: catalog-sources/{{cpversion}}/02a-license-service-catalog-source.yaml
-        state: absent
-      when:  action  == 'remove'
+    # - name: Remove License Service Catalog Source
+    #   kubernetes.core.k8s:
+    #     src: catalog-sources/{{cpversion}}/02a-license-service-catalog-source.yaml
+    #     state: absent
+    #   when:  action  == 'remove'
 
-    - name: Remove License Service Operator Group in namespace
-      kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/resources/license-service-operatorgroup.yaml
-        state: absent
-      when: action  == 'remove'  
+    # - name: Remove License Service Operator Group in namespace
+    #   kubernetes.core.k8s:
+    #     src: artifacts/{{cpversion}}/resources/license-service-operatorgroup.yaml
+    #     state: absent
+    #   when: action  == 'remove'  
 
 
 ############################################
 # CREATION
 ############################################
-    - name: Create License Service Catalog Source
-      kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/catalog-sources/catalogsource-licensing-service.yaml
-        state: present
-      when: action  == 'install'
+    # - name: Create License Service Catalog Source
+    #   kubernetes.core.k8s:
+    #     src: artifacts/{{cpversion}}/catalog-sources/licensing-service.yaml
+    #     state: present
+    #   when: action  == 'install'
 
     - name: Create License Service Namespace
       kubernetes.core.k8s:
@@ -60,21 +60,21 @@
         state: present
       when: action  == 'install'    
 
-    - name: Enable License Service Operator Group in namespace
-      kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/resources/license-service-operatorgroup.yaml
-        state: present
-      when: action  == 'install'
+    # - name: Enable License Service Operator Group in namespace
+    #   kubernetes.core.k8s:
+    #     src: artifacts/{{cpversion}}/resources/license-service-operatorgroup.yaml
+    #     state: present
+    #   when: action  == 'install'
 
     - name: Enable License Service Operator Subscription
       kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/resources/licensing-service-subscription.yaml
+        src: artifacts/{{cpversion}}/subscriptions/licensing-service.yaml
         state: present
       when: action  == 'install'
 
     - name: Creating License Service Instance
       kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/resources/licensing-service-instance.yaml
+        src: artifacts/{{cpversion}}/instances/licensing-service.yaml
         state: present
       when: action  == 'install'
 
