@@ -5,7 +5,7 @@
   gather_facts: false
   vars_prompt:
     - name: thisservice
-      prompt: Which capability do you want subscription activate [ navigator, mq, ace, eventstreams, certmanager, common-services ] ?
+      prompt: Which capability do you want subscription activate [ navigator, mq, ace, eem, ep, aspera, apic, eventstreams, datapower, assetrepo, common-services ] ?
       private: no
   tasks:
     - include_vars: vars_deployment.yaml
@@ -25,6 +25,18 @@
         src: artifacts/{{cpversion}}/subscriptions/appconnect.yaml
         state: present
       when:  (action  == 'remove') and (thisservice == 'ace')
+
+    - name: Remove APIC Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/apiconnect.yaml
+        state: present
+      when:  (action  == 'remove') and (thisservice == 'apic')
+
+    - name: Remove DATAPOWER Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/datapower.yaml
+        state: present
+      when:  (action  == 'remove') and (thisservice == 'datapower')
 
     - name: Remove Asset Repo Operator Subscriptions
       kubernetes.core.k8s:
@@ -50,6 +62,23 @@
         state: present
       when:  (action  == 'remove') and (thisservice == 'common-services')
       
+    - name: Remove EVENT ENDPOINT MGMT Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/eem.yaml
+        state: absent
+      when:  (action  == 'remove') and (thisservice == 'eem')
+
+    - name: Remove EVENT PROCESSING Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/ep.yaml
+        state: absent
+      when:  (action  == 'remove') and (thisservice == 'ep')
+
+    - name: Remove FLINK Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/flink.yaml
+        state: absent
+      when:  (action  == 'remove') and (thisservice == 'ep')
 
 ############################################
 # CREATION
@@ -67,6 +96,24 @@
         state: present
       when:  (action  == 'install') and (thisservice == 'ace')
 
+    - name: Install ASPERA Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/aspera.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'aspera')
+
+    - name: Install APIC Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/apiconnect.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'apic')
+
+    - name: Install DATAPOWER Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/datapower.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'datapower')
+
     - name: Install Asset Repo Operator Subscriptions
       kubernetes.core.k8s:
         src: artifacts/{{cpversion}}/subscriptions/asset-repo.yaml
@@ -78,6 +125,25 @@
         src: artifacts/{{cpversion}}/subscriptions/eventstreams.yaml
         state: present
       when:  (action  == 'install') and (thisservice == 'eventstreams')
+
+    - name: Install EVENT ENDPOINT MGMT Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/eem.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'eem')
+
+    - name: Install EVENT PROCESSING Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/ep.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'ep')
+
+    - name: Install FLINK Operator Subscriptions
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/subscriptions/flink.yaml
+        state: present
+      when:  (action  == 'install') and (thisservice == 'ep')
+
 
     - name: Install Platform Navigator Operator Subscriptions
       kubernetes.core.k8s:

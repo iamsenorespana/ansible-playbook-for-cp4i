@@ -1,0 +1,28 @@
+apiVersion: events.ibm.com/v1beta1
+kind: EventGateway
+metadata:
+  name: eem-demo-gw
+  namespace: tools
+spec:
+  license:
+    accept: true
+    license: L-JTPV-KYG8TF
+    metric: VIRTUAL_PROCESSOR_CORE
+    use: CloudPakForIntegrationNonProduction
+  managerEndpoint: "https://${EEM_GATEWAY_ROUTE}"
+  gatewayGroupName: egw-group
+  gatewayID: egw-1
+  tls:
+    caSecretName: eem-demo-mgr-ibm-eem-manager-ca
+  template:
+    pod:
+      spec:
+        containers:
+          - name: egw
+            resources:
+              requests:
+                cpu: '0.5'
+                memory: 512Mi
+              limits:
+                cpu: '1'
+                memory: 1Gi

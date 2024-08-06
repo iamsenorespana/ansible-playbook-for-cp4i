@@ -1,0 +1,50 @@
+{
+    "navigator": {
+        "package":"ibm-integration-platform-navigator",
+        "version":"7.3.0"
+    },
+    "asset-repo": {
+        "package": "ibm-integration-asset-repository",
+        "version":"1.7.1"
+    },
+    "apiconnect": {
+        "package": "ibm-apiconnect",
+        "version":"5.2.0"        
+    },
+    "appconnect": {
+        "package": "ibm-appconnect",
+        "version":"12.0.0"        
+    },    
+    "mq": {
+        "package": "ibm-mq",
+        "version":"3.2.2"        
+    }, 
+    "eventstreams": {
+        "package": "ibm-eventstreams",
+        "version":"3.4.0"        
+    }, 
+    "eem": {
+        "package": "ibm-eventendpointmanagement",
+        "version":"11.2.2"        
+    }, 
+    "datapower": {
+        "package": "ibm-datapower-operator",
+        "version":"1.11.1"        
+    }, 
+    "aspera": {
+        "package": "ibm-aspera-hsts-operator",
+        "version":"1.5.13"        
+    }, 
+    "common-services": {
+        "package": "ibm-cp-common-services",
+        "version":"4.6.3"         
+    },
+    "flink": {
+        "package":"ibm-eventautomation-flink",
+        "version":"1.1.8"
+    },
+    "ep":{
+        "package":"ibm-eventprocessing",
+        "version":"1.1.8"
+    }
+}

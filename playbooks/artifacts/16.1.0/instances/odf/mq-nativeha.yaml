@@ -1,0 +1,40 @@
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  annotations:
+    com.ibm.mq/write-defaults-spec: 'false'
+  name: qmgr-native-ha
+spec:
+  license:
+    accept: true
+    license: L-JTPV-KYG8TF
+    use: NonProduction
+  queueManager:
+    name: QMGRNATIVEHA
+    resources:
+      limits:
+        cpu: 500m
+      requests:
+        cpu: 500m
+    storage:
+      queueManager:
+        type: persistent-claim
+      defaultClass: ocs-storagecluster-ceph-rbd
+      defaultDeleteClaim: true
+    availability:
+      type: NativeHA
+  template:
+    pod:
+      containers:
+        - env:
+            - name: MQSNOAUT
+              value: 'yes'
+          name: qmgr
+  version: 9.4.0.0-r1
+  web:
+    console:
+      authentication:
+        provider: integration-keycloak
+      authorization:
+        provider: integration-keycloak
+    enabled: true

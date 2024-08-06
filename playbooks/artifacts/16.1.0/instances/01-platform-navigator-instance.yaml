@@ -1,0 +1,13 @@
+apiVersion: integration.ibm.com/v1beta1
+kind: PlatformNavigator
+metadata:
+  name: cp4i-navigator
+  namespace: tools
+spec:
+  integrationAssistant:
+    enabled: true
+  license:
+    accept: true
+    license: L-JTPV-KYG8TF
+  replicas: 3
+  version: 16.1.0

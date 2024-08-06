@@ -1,0 +1,27 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-apiconnect-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-apiconnect-5.2.0
+  publisher: IBM
+  image: icr.io/cpopen/ibm-apiconnect-catalog@sha256:61f52267bff3beb4455636763af4c95c6a5b7bc57b159ce0846d53364f2d4134
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-datapower-operator-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-datapower-operator-1.11.1
+  publisher: IBM
+  image: icr.io/cpopen/datapower-operator-catalog@sha256:8edd54bff60b24316cd7cc90db3d6c6918bb04e5a2265e81de6d46c526997545
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s

@@ -1,0 +1,83 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: cloud-native-postgresql-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-cloud-native-postgresql-4.25.0
+  publisher: IBM
+  image: icr.io/cpopen/ibm-cpd-cloud-native-postgresql-operator-catalog@sha256:0b46a3ec66622dd4a96d96243602a21d7a29cd854f67a876ad745ec524337a1f
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-cs-iam-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-cs-iam-4.5.2
+  publisher: IBM
+  image: icr.io/cpopen/ibm-iam-operator-catalog@sha256:b9ceffa5a688c95e1512e90e2b397bcc4b8d7208bebfe7c0715765cff6a46de7
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-cs-install-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-cs-install-4.6.3
+  publisher: IBM
+  image: icr.io/cpopen/ibm-cs-install-catalog@sha256:f31a492fed15bd945d9298f700aadbea5bd9e502f70d47c416a878e0162d2dbe
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-events-operator-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-events-operator-5.0.1
+  publisher: IBM
+  image: icr.io/cpopen/ibm-events-operator-catalog@sha256:4cd92e1a78b080cc94beae89c257078314a6a0fae66e8a14512953b1c4004c09
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-zen-operator-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-zen-3.1.5
+  publisher: IBM
+  image: icr.io/cpopen/ibm-zen-operator-catalog@sha256:d89d5ba29fa208d4a3664d889874171cc451e20d6f67d7ca0abb8633adf89b8b
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: opencloud-operators
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-cp-common-services-4.6.3
+  publisher: IBM
+  image: icr.io/cpopen/ibm-common-service-catalog@sha256:93684df9c216eee6f26cab3f9dab69e1844a9e2b2bcea1261d578b1670346e02
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s

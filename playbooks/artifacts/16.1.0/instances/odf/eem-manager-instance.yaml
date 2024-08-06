@@ -1,0 +1,32 @@
+apiVersion: events.ibm.com/v1beta1
+kind: EventEndpointManagement
+metadata:
+  name: eem-demo-mgr
+  namespace: tools
+spec:
+  license:
+    accept: true
+    license: L-JTPV-KYG8TF
+    metric: VIRTUAL_PROCESSOR_CORE
+    use: CloudPakForIntegrationNonProduction
+  manager:
+    authConfig:
+      authType: LOCAL
+    storage:
+      storageClassName: ocs-storagecluster-ceph-rbd
+      type: persistent-claim
+    template:
+      pod:
+        spec:
+          containers:
+            - name: manager
+              env:
+                - name: EI_AUTH_WEB_CLIENT_TIMEOUT
+                  value: '30000'
+              resources:
+                requests:
+                  cpu: '0.25'
+                  memory: 256Mi
+                limits:
+                  cpu: '0.5'
+                  memory: 512Mi

@@ -1,0 +1,37 @@
+apiVersion: events.ibm.com/v1beta1
+kind: EventProcessing
+metadata:
+  name: ep-demo
+  namespace: tools
+spec:
+  license:
+    accept: true
+    license: L-HRZF-DWHH7A
+    use: EventAutomationNonProduction
+  flink:
+    endpoint: 'ea-flink-demo-rest:8081'
+  authoring:
+    authConfig:
+      authType: LOCAL
+    storage:
+      storageClassName: ocs-storagecluster-ceph-rbd
+      type: persistent-claim
+      size: 100M
+    template:
+      pod:
+        spec:
+          containers:
+            - name: backend
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: '-Djavax.net.ssl.trustStore=/opt/ibm/sp-backend/certs/eventautomation.jks -Djavax.net.ssl.trustStorePassword=eventautomationstore'
+              volumeMounts:
+                - mountPath: /opt/ibm/sp-backend/certs
+                  name: truststore
+          volumes:
+            - name: truststore
+              secret:
+                items:
+                  - key: eventautomation.jks
+                    path: eventautomation.jks
+                secretName: eventautomation-truststore

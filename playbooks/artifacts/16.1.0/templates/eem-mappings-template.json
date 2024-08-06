@@ -1,0 +1,17 @@
+{
+    "mappings": [
+      {
+        "id": "author1",
+        "roles": [
+          "author"
+        ]
+      },
+      {
+        "id": "viewer1",
+        "roles": [
+          "viewer"
+        ]
+      }
+    ]
+  }
+  

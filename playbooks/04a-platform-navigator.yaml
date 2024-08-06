@@ -23,7 +23,7 @@
 
     - name: Create Platform Navigator Instance
       kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/01-platform-navigator-instance.yaml
+        src: artifacts/{{cpversion}}/instances/01-platform-navigator-instance.yaml
         state: present
       when: action  == 'install'    
 
@@ -34,7 +34,7 @@
 
     - name: Remote Platform Navigator Instance
       kubernetes.core.k8s:
-        src: artifacts/{{cpversion}}/01-platform-navigator-instance.yaml
+        src: artifacts/{{cpversion}}/instances/01-platform-navigator-instance.yaml
         state: absent
       when: action  == 'remove'  
 

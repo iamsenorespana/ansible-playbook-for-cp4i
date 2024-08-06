@@ -6,7 +6,8 @@
 mynamespace: "tools"
 
 # Variable for Cloud Pak Version
-cpversion: "2023.4"
+# [ 16.1.0, 2023.4,  ]
+cpversion: "16.1.0"
 
 # Variable for Storage Type: [ ephemeral | odf | roks ]
 storagetype: odf

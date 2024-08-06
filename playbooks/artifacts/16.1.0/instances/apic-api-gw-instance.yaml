@@ -1,0 +1,38 @@
+apiVersion: gateway.apiconnect.ibm.com/v1beta1
+kind: GatewayCluster
+metadata:
+  name: remote-api-gw
+  labels: {
+    app.kubernetes.io/instance: "gateway",
+    app.kubernetes.io/managed-by: "ibm-apiconnect",
+    app.kubernetes.io/name: "remote-api-gw"
+  }
+spec:
+  version: 10.0.8.0
+  profile: n1xc1.m8
+  apicGatewayServiceV5CompatibilityMode: false
+  mgmtPlatformEndpointCASecret:
+    secretName: apim-demo-ingress-ca
+  gatewayEndpoint:
+    annotations:
+      cert-manager.io/issuer: ingress-issuer
+    hosts:
+    - name: "rgw.${STACK_HOST}"
+      secretName: gwv6-endpoint
+  gatewayManagerEndpoint:
+    annotations:
+      cert-manager.io/issuer: ingress-issuer
+    hosts:
+    - name: "rgwd.${STACK_HOST}"
+      secretName: gwv6-manager-endpoint
+  apicGatewayServiceTLS:
+    secretName: gateway-service
+  apicGatewayPeeringTLS:
+    secretName: gateway-peering
+  datapowerLogLevel: 3
+  license:
+    accept: true
+    use: nonproduction
+    license: L-DZZQ-MGVN8V
+  adminUser:
+    secretName: admin-secret

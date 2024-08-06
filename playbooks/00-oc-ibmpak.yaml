@@ -1,0 +1,13 @@
+---
+# ./00-prerequisites.yaml
+
+- name: Check LocalHost Pre-Requisites
+  hosts: "localhost"
+  gather_facts: false
+  tasks:
+     
+    - name: Run a script using an executable in a system path
+      ansible.builtin.script: ./scripts/00-localhost-preqs.sh
+      args:
+        executable: /bin/bash
+      

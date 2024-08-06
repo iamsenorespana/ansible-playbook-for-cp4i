@@ -14,9 +14,73 @@
       kubernetes.core.k8s:
         src: artifacts/{{cpversion}}catalog-sources/00a-cp4i-catalog-sources.yaml
         state: absent
-      when:  action  == 'remove'
+      when:  action  == 'remove' and cpversion == '2023.4'
 
- 
+    - name: Remove COMMON SERVICE catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-common-services.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0' 
+
+    - name: Remove PLATFORM NAVIGATOR catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-navigator.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove ASSET REPO catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-asset-repo.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove API CONNECT catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-apiconnect.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove APP CONNECT catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-appconnect.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove ASPERA catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-aspera.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove EEM catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-eem.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove EVENT PROCESSING catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-ep.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove APACHE FLINK catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-flink.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove EVENT STREAMS catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-eventstreams.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
+
+    - name: Remove MQ catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-mq.yaml
+        state: absent
+      when:  action  == 'remove' and cpversion == '16.1.0'
 
 ############################################
 # CREATION
@@ -26,10 +90,70 @@
       kubernetes.core.k8s:
         src: artifacts/{{cpversion}}/catalog-sources/00a-cp4i-catalog-sources.yaml
         state: present
-      when:  action  == 'install'
+      when:  action  == 'install' and cpversion == '2023.4'
 
+    - name: Install COMMON SERVICE catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-common-services.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
 
+    - name: Install PLATFORM NAVIGATOR catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-navigator.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
  
+    - name: Install ASSET REPOSITORY catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-asset-repo.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
 
+    - name: Install API CONNECT catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-apiconnect.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
 
+    - name: Install APP CONNECT catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-appconnect.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
 
+    - name: Install ASPERA catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-aspera.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
+
+    - name: Install EEM catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-eem.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
+
+    - name: Install EVENT PROCESSING catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-ep.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
+
+    - name: Install APACHE FLINK catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-flink.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
+
+    - name: Install EVENT STREAMS catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-eventstreams.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
+
+    - name: Install MQ catalog source
+      kubernetes.core.k8s:
+        src: artifacts/{{cpversion}}/catalog-sources/cs-mq.yaml
+        state: present
+      when:  action  == 'install' and cpversion == '16.1.0'
